@@ -1,51 +1,33 @@
 import bpy
-from ..Operators.Output import (
+from ..Operators.Output import KEYS_OT_output
 
-    keys_output
+class RENDER_OT_open_keys_render_popup(bpy.types.Operator):
+    """打开关键帧渲染"""
+    bl_idname = "render.open_keys_render_popup"
+    bl_label = "蜡笔关键帧渲染"
+    
+    def execute(self, context):
+        bpy.ops.wm.call_menu(name="UI_MT_keys_render_settings")
+        return {'FINISHED'}
 
-)
-
-
-# 指定UI在面板上绘制
-class UI_PT_KEYS_RENDER(bpy.types.Panel):
-    """序列帧渲染_YB"""  # 这个是面板注释
-    bl_label = "序列帧渲染_YB"  # 面板的名字
-    bl_idname = "UI_PT_KEYS_RENDER"  # 唯一标识符，不可重复
-    bl_space_type = 'PROPERTIES'  # 在属性面板绘制
-    bl_region_type = 'WINDOW'
-    bl_context = "data"  # 渲染窗口下的物体选项卡
-
-    # 主要绘制部分
+# 窗口界面
+class UI_MT_keys_render_settings(bpy.types.Menu):
+    bl_label = "关键帧渲染设置"
+    bl_idname = "UI_MT_keys_render_settings"
 
     def draw(self, context):
-
         layout = self.layout
 
-        # 获取当前场景名
-        scene = bpy.context.scene
+        box = layout.box()
+        box.label(text="基本设置：")
+        row = box.row()
 
-        # 获取渲染路径
-        file = scene.render
-        # 切分面板
-        row = layout.row()
-
-        # 暴露属性
-        row = layout.row()
-        row.prop(file, "filepath")
-
+        # 设置图层标识
+        row.prop(context.scene, "layer_tag", text="LayerTag")
+        # 渲染路径
+        row.prop(context.scene.render, "filepath")
         # 执行渲染操作
         row = layout.row()
-        row.scale_y = 1.5
-        row.operator("keys.output", icon='EXPORT', text="全选导出关键帧")
+        row.scale_y = 3
+        row.operator("keys.output", icon='EXPORT', text="渲染蜡笔关键帧")
 
-    # 注册
-
-    def register():
-
-        bpy.utils.register_class(keys_output)
-
-    # 注销
-
-    def unregister():
-
-        bpy.utils.unregister_class(keys_output)
