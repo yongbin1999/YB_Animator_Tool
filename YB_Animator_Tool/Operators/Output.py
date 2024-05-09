@@ -1,13 +1,12 @@
 import bpy
 import csv
+import os
 
-
-class keys_output(bpy.types.Operator):
+class KEYS_OT_output(bpy.types.Operator):
     """逐帧渲染蜡笔动画关键帧"""
     bl_idname = "keys.output"
     bl_label = "导出关键帧"
-    bl_description = "逐帧渲染蜡笔动画关键帧\n(多层导出需要全选时间轴左侧的蜡笔图层)"
-
+    bl_description = "逐帧渲染蜡笔动画关键帧\n(请确保已选中蜡笔对象)"
 
     def execute(self, context):
         
@@ -28,6 +27,17 @@ class keys_output(bpy.types.Operator):
         if scene.render.film_transparent == False:
             scene.render.film_transparent = True
             film_transparent=False
+
+        # 处理并设置渲染路径
+        render_filepath = scene.render.filepath
+        # 确保路径以正确的分隔符结束
+        render_filepath = bpy.path.abspath(render_filepath)  # 转换为绝对路径
+        if not render_filepath.endswith(os.sep):
+            render_filepath += os.sep
+        
+        # 更新场景渲染路径
+        scene.render.filepath = render_filepath
+        print("Updated render filepath:", scene.render.filepath)
 
         # 保存一份渲染路径
         render_filepath = scene.render.filepath
@@ -57,7 +67,8 @@ class keys_output(bpy.types.Operator):
                 for j in range(J):
                     List[i].append('')
             return List
-        Frame = ['Frame', '动画']
+        Layer_TAG = context.scene.layer_tag
+        Frame = ['Frame', Layer_TAG]
         header = Create_List(GPLayer_sum+2, 0)
         data = Create_List(frame_end+5, GPLayer_sum+2)
         for i in range(frame_end):
@@ -71,9 +82,25 @@ class keys_output(bpy.types.Operator):
         # 跳转到第0层
         bpy.ops.gpencil.layer_active(layer=0)
         print(scene.frame_current)
-        # 检测是否处在蜡笔模式
-        if bpy.context.object.mode != 'PAINT_GPENCIL':
-            bpy.ops.gpencil.paintmode_toggle()
+
+        #设置蜡笔环境
+        def ensure_gpencil_mode_and_select_layers():
+            obj = bpy.context.active_object  # 获取活跃对象
+            # 检查是否有活跃对象和是否为蜡笔对象
+            if obj and obj.type == 'GPENCIL':
+                # 检查当前模式是否已经是蜡笔绘制模式
+                if bpy.context.object.mode != 'PAINT_GPENCIL':
+                    # 尝试进入蜡笔绘制模式
+                    bpy.ops.object.mode_set(mode='PAINT_GPENCIL', toggle=False)
+                    print("Switched to Grease Pencil mode.")
+                # 现在已经确保处于蜡笔模式，下一步全选蜡笔图层
+                gpencil = obj.data  # 获取蜡笔数据
+                for layer in gpencil.layers:
+                    layer.select = True  # 将每一层设为选中
+                print("All Grease Pencil layers selected.")
+            else:
+                print("请选中蜡笔对象。\nNo Grease Pencil object selected.")
+        ensure_gpencil_mode_and_select_layers()
 
         # 检测图层是否被隐藏
         Hide_True_Layer = []
@@ -128,8 +155,8 @@ class keys_output(bpy.types.Operator):
                 for i in range(frame_end):
 
                     # 修改当前场景渲染路径
-                    scene.render.filepath = render_filepath + "\ " + str(bpy.context.scene. name_full)+"_"+str(Layer) + "\ " + str(GPLayer) + "\ " + \
-                        str(keysname)  # .zfill(5)
+                    scene.render.filepath = render_filepath + "\\" + str(bpy.context.scene. name_full)+"_"+str(Layer) + "\\" + str(GPLayer) + "\\" + \
+                        str(GPLayer)+"_"+str(keysname)  # .zfill(5)
 
                     # 渲染图片
                     bpy.ops.render.render(animation=False, write_still=True)
@@ -160,25 +187,19 @@ class keys_output(bpy.types.Operator):
                 if Hide_True_Layer[i] == i:
                     bpy.context.object.data.layers[i].hide = True
 
-
-
         if film_transparent==False:
             scene.render.film_transparent = False
 
         # 创建CSV文件
-        csvfile = render_filepath[:-1] + "\ " + str(bpy.context.scene. name_full)+"_"+str(Layer) + "\ " + \
+        csvfile = render_filepath[:-1] + "\\" + str(bpy.context.scene. name_full)+"_"+str(Layer) + "\\" + \
             str(Layer)+ "." + "csv"
             
         # 将列表写入CSV文件
-        with open(str(csvfile), 'w', encoding='ANSI', newline='') as f:
+        with open(str(csvfile), 'w', encoding='gbk', errors='replace', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(Frame)
             writer.writerow(header)
             writer.writerows(data)
             
-        
 
         return {'FINISHED'}
-
-        
-   
