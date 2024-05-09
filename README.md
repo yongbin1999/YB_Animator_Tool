@@ -31,3 +31,13 @@ CSV文件所记录的律表(后缀为*Hide的图层为被隐藏的图层，隐�
 感谢您的支持!
 源代码可以优化改进的地方，也欢迎提供帮助，源代码注释得非常详细。
 其他如有疑问或者BUG反馈，请建立issue提供反馈，谢谢！
+
+## AE所对接的串帧脚本推荐
+青涧1大佬的脚本：
+[CsvTimeSheetScript](https://github.com/qingjian1/qingjian_AEScripts)
+
+![20240509-113501](https://github.com/yongbin1999/YB_Animator_Tool/assets/47911980/98b952cd-b795-4230-8161-98faf9ff56bb)
+
+![20240509-113745](https://github.com/yongbin1999/YB_Animator_Tool/assets/47911980/7e8513bc-aff7-442d-9d9c-c09b2dae9e67)
+
+![20240509-113551](https://github.com/yongbin1999/YB_Animator_Tool/assets/47911980/c16be9af-5014-4224-b755-3667a6f803e9)
