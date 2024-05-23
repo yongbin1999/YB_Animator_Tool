@@ -3,12 +3,12 @@ from .Ui.Ui import RENDER_OT_open_keys_render_popup, UI_MT_keys_render_settings
 from .Operators.Output import KEYS_OT_output
 
 bl_info = {
-    "name": "YB动画工具",
-    "author": "YB(通过点击下方文档，可以进入插件主页，查看更新状况)",
-    "description": "用于blender动画",
+    "name": "YB_Animator_Tool",
+    "author": "YB_",
+    "description": "Tool for Blender animation",
     "blender": (4, 0, 0),
     "version": (1, 1, 0),
-    "location": "蜡笔关键帧渲染在顶部渲染菜单中",
+    "location": "Crayon Keyframe Rendering is in the render menu at the top",
     "warning": "",
     "category": "YB_Animator",
     "doc_url": "https://github.com/yongbin1999/YB_Animator_Tool"

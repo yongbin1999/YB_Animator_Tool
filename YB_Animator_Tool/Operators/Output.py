@@ -5,14 +5,14 @@ import os
 class KEYS_OT_output(bpy.types.Operator):
     """逐帧渲染蜡笔动画关键帧"""
     bl_idname = "keys.output"
-    bl_label = "导出关键帧"
-    bl_description = "逐帧渲染蜡笔动画关键帧\n(请确保已选中蜡笔对象)"
+    bl_label = "Export Keyframes"
+    bl_description = "Render Grease Pencil keyframes frame by frame\n(Make sure the Grease Pencil object is selected)"
 
     def execute(self, context):
         
         # 发出提示
         def draw(self, context):
-            self.layout.label(text="开始运行")
+            self.layout.label(text="Started")
         bpy.context.window_manager.popup_menu(draw)
         # bpy.types.BlendData.temp_data()
         #bpy.context.space_data.context = 'DATA'
