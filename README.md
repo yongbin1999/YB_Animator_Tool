@@ -4,7 +4,7 @@ blender动画工具是一款动画便捷插件，主要帮助解决blender制作
 ## 功能
 对blender的蜡笔图层以分层进行序列帧导出，并且生成CSV律表文件，律表文件效仿绘画软件Clip Studio Paint生成的律表排序法和文件格式。可使用绘画软件Clip Studio Paint的相同方式导入后期软件AE中
 
-An animation plugin for Blender to export grease pencil layers as keyframes and CSV.
+A convenient animation plugin designed to address some of the inconveniences encountered when creating animations in Blender. Currently, it offers the following functionality: exporting grease pencil layer content from Blender as sequenced keyframes, and generating a CSV timing sheet file.
 ## 导出蜡笔序列帧方法
 选中蜡笔对象，点击渲染菜单中的蜡笔关键帧渲染:
 
