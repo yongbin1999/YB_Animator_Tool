@@ -1,6 +1,8 @@
 # blender动画工具
 ## YB_Animator_Tool
 blender动画工具是一款动画便捷插件，主要帮助解决blender制作动画时，一些不便捷的地方。
+
+[blender Extension Website](https://extensions.blender.org/add-ons/yb-animator-tool/)
 ## 功能
 对blender的蜡笔图层以分层进行序列帧导出，并且生成CSV律表文件，律表文件效仿绘画软件Clip Studio Paint生成的律表排序法和文件格式。可使用绘画软件Clip Studio Paint的相同方式导入后期软件AE中
 
