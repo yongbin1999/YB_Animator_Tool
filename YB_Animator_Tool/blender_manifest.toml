@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "YB_Animator_Tool"
-version = "1.1.2"
+version = "1.1.3"
 name = "YB Animator Tool"
 tagline = "export grease pencil layers as keyframes and CSV"
 maintainer = "YB_ <lybyb@foxmail.com>"
@@ -56,3 +56,5 @@ license = ["SPDX:GPL-3.0-or-later"]
 #   "/.git/"
 #   "__pycache__/"
 # ]
+[permissions]
+files = "Output CSV and sequence diagram"

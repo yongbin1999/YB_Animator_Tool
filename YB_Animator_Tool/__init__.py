@@ -7,7 +7,7 @@ bl_info = {
     "author": "YB_",
     "description": "Tool for Blender animation,export grease pencil layers as keyframes and CSV",
     "blender": (4, 0, 0),
-    "version": (1, 1, 2),
+    "version": (1, 1, 3),
     "location": "Crayon Keyframe Rendering is in the render menu at the top",
     "warning": "",
     "category": "YB_Animator",
