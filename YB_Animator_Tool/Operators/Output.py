@@ -80,7 +80,7 @@ class KEYS_OT_output(bpy.types.Operator):
         #Layer = bpy.context.object.data.name_full
 
         # 跳转到第0层
-        bpy.ops.gpencil.layer_active(layer=0)
+        bpy.ops.grease_pencil.layer_active(layer=0)
         print(scene.frame_current)
 
         #设置蜡笔环境
@@ -115,7 +115,7 @@ class KEYS_OT_output(bpy.types.Operator):
 
         # 循环跳转图层
         for i in range(GPLayer_sum):
-            bpy.ops.gpencil.layer_active(layer=i)
+            bpy.ops.grease_pencil.layer_active(layer=i)
 
             print(bpy.data.grease_pencils[Layer].layers.active_note)
 
