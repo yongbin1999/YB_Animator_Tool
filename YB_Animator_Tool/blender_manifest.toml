@@ -3,7 +3,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "YB_Animator_Tool"
-version = "1.1.3"
+version = "1.1.4"
 name = "YB Animator Tool"
 tagline = "export grease pencil layers as keyframes and CSV"
 maintainer = "YB_ <lybyb@foxmail.com>"
@@ -25,7 +25,7 @@ type = "add-on"
 # https://docs.blender.org/manual/en/dev/extensions/tags.html
 tags = ["Grease Pencil", "Animation", "User Interface"]
 
-blender_version_min = "4.2.0"
+blender_version_min = "4.3.0"
 # Optional: maximum supported Blender version
 # blender_version_max = "5.1.0"
 

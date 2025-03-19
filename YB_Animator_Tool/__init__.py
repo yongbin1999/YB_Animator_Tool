@@ -1,13 +1,13 @@
 import bpy
 from .Ui.Ui import RENDER_OT_open_keys_render_popup
-from .Operators.Output import KEYS_OT_output
+from .Operators.KeyframeRenderer import KEYS_OT_output
 
 bl_info = {
     "name": "YB_Animator_Tool",
     "author": "YB_",
     "description": "Tool for Blender animation,export grease pencil layers as keyframes and CSV",
-    "blender": (4, 0, 0),
-    "version": (1, 1, 3),
+    "blender": (4, 3, 0),
+    "version": (1, 1, 4),
     "location": "Crayon Keyframe Rendering is in the render menu at the top",
     "warning": "",
     "category": "YB_Animator",
@@ -22,7 +22,7 @@ class YBAnimatorPreferences(bpy.types.AddonPreferences):
         name="Layer Tag",
         default="Keys",
         update=lambda self, context: update_layer_tag(context)
-    )
+    ) # type: ignore
 
     def draw(self, context):
         layout = self.layout
